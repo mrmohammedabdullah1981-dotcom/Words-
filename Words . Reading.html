@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>التطبيق التعليمي التفاعلي - مفردات ومعاني</title>
+  <style>
+    :root {
+      --primary: #15803d;
+      --primary-dark: #166534;
+      --secondary: #0f766e;
+      --gold: #b45309;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --success: #16a34a;
+      --error: #dc2626;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
+      color: white;
+      text-align: center;
+      padding: 35px 20px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      margin-bottom: 25px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 1.05rem;
+      opacity: 0.95;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 25px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    .card h2 {
+      color: var(--primary-dark);
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+      font-size: 1.4rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      text-align: right;
+      font-size: 0.95rem;
+    }
+
+    th {
+      background-color: #f0fdf4;
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    tr:nth-child(even) {
+      background-color: #fafafa;
+    }
+
+    .ltr-text {
+      direction: ltr;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .badge {
+      background: #e2e8f0;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: #334155;
+    }
+
+    /* Quiz Styling */
+    .quiz-item {
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .question-title {
+      font-weight: 600;
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .options-grid { grid-template-columns: 1fr; }
+    }
+
+    .opt-btn {
+      background: white;
+      border: 1.5px solid #cbd5e1;
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: right;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+    }
+
+    .opt-btn:hover {
+      background: #f1f5f9;
+      border-color: var(--secondary);
+    }
+
+    .opt-btn.correct {
+      background: #dcfce7;
+      border-color: var(--success);
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    .opt-btn.wrong {
+      background: #fee2e2;
+      border-color: var(--error);
+      color: var(--error);
+    }
+
+    .feedback {
+      margin-top: 8px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      display: none;
+    }
+
+    .submit-container {
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    .main-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+
+    .main-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Certificate Styling */
+    #certificateCard {
+      display: none;
+      background: #fff;
+      border: 8px double #15803d;
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      position: relative;
+      margin-top: 30px;
+    }
+
+    .cert-title {
+      font-size: 2.2rem;
+      color: #166534;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .cert-subtitle {
+      font-size: 1.1rem;
+      color: #475569;
+      margin-bottom: 25px;
+    }
+
+    .cert-name {
+      font-size: 2rem;
+      color: #0f172a;
+      font-weight: bold;
+      border-bottom: 2px solid #bbf7d0;
+      display: inline-block;
+      padding: 0 30px 5px;
+      margin-bottom: 20px;
+    }
+
+    .cert-body {
+      font-size: 1.1rem;
+      color: #334155;
+      max-width: 650px;
+      margin: 0 auto 30px;
+      line-height: 1.8;
+    }
+
+    .cert-signatures {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 40px;
+      border-top: 1px solid #cbd5e1;
+      padding-top: 20px;
+    }
+
+    .sig-box {
+      text-align: center;
+    }
+
+    .sig-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+    }
+
+    .sig-name {
+      font-size: 1.15rem;
+      font-weight: bold;
+      color: var(--primary-dark);
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #certificateCard, #certificateCard * {
+        visibility: visible;
+      }
+      #certificateCard {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        display: block !important;
+      }
+      .print-btn {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <h1>منصة تعلم المفردات التفاعلية</h1>
+    <p>شرح الكلمات ومعانيها، التدريب العملي، وشهادة التميز لسيف</p>
+  </header>
+
+  <!-- بطاقة الشرح وجدول الكلمات -->
+  <div class="card">
+    <h2>1. الكلمات والتعريفات والأمثلة التطبيقية</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>الكلمة (Word)</th>
+          <th>التعريف بالإنجليزية</th>
+          <th>المعنى بالعربية</th>
+          <th>المثال وترجمته</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="ltr-text">1. transforming</td>
+          <td class="ltr-text"><span class="badge">changing completely</span></td>
+          <td>يغيّر تماماً / يُحوّل</td>
+          <td>Technology is transforming our lives.<br><small style="color: var(--text-muted);">التكنولوجيا تُغيّر حياتنا تماماً.</small></td>
+        </tr>
+        <tr>
+          <td class="ltr-text">2. hub</td>
+          <td class="ltr-text"><span class="badge">center</span></td>
+          <td>مركز / محور</td>
+          <td>Riyadh is a major business hub.<br><small style="color: var(--text-muted);">الرياض مركز تجاري رئيسي.</small></td>
+        </tr>
+        <tr>
+          <td class="ltr-text">3. vibrant</td>
+          <td class="ltr-text"><span class="badge">strong and active</span></td>
+          <td>مفعم بالحيوية والنشاط</td>
+          <td>The city has a vibrant culture.<br><small style="color: var(--text-muted);">تتمتع المدينة بثقافة مفعمة بالحيوية.</small></td>
+        </tr>
+        <tr>
+          <td class="ltr-text">4. thriving</td>
+          <td class="ltr-text"><span class="badge">prosperous and strong</span></td>
+          <td>مزدهر وناجح</td>
+          <td>The local market is thriving this year.<br><small style="color: var(--text-muted);">السوق المحلي يزدهر هذا العام.</small></td>
+        </tr>
+        <tr>
+          <td class="ltr-text">5. ambitious</td>
+          <td class="ltr-text"><span class="badge">determined to succeed</span></td>
+          <td>طموح / مصمم على النجاح</td>
+          <td>Saif is an ambitious student.<br><small style="color: var(--text-muted);">سيف طالب طموح ومجتهد.</small></td>
+        </tr>
+        <tr>
+          <td class="ltr-text">6. enterprises</td>
+          <td class="ltr-text"><span class="badge">businesses</span></td>
+          <td>شركات / مشاريع تجارية</td>
+          <td>Small enterprises support the economy.<br><small style="color: var(--text-muted);">تدعم المشاريع الصغيرة الاقتصاد الوطني.</small></td>
+        </tr>
+        <tr>
+          <td class="ltr-text">7. diversify</td>
+          <td class="ltr-text"><span class="badge">make more varied</span></td>
+          <td>يُنوّع ويعدّد</td>
+          <td>The country wants to diversify its economy.<br><small style="color: var(--text-muted);">تسعى الدولة إلى تنويع مصادر اقتصادها.</small></td>
+        </tr>
+        <tr>
+          <td class="ltr-text">8. transparent</td>
+          <td class="ltr-text"><span class="badge">open and honest</span></td>
+          <td>شفاف / صريح وواضح</td>
+          <td>The company has transparent rules.<br><small style="color: var(--text-muted);">تمتلك الشركة أنظمة وقواعد شفافة وصريحة.</small></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- بطاقة الاختبار التفاعلي -->
+  <div class="card" id="quizCard">
+    <h2>2. اختبار قياس الفهم الذاتي (اضغط لاختيار الإجابة)</h2>
+    
+    <div class="quiz-item" id="q1">
+      <div class="question-title">1. What is the meaning of the word <b>"transforming"</b>?</div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="answer(this, 'q1', false, 'خطأ!')">a. moving</button>
+        <button class="opt-btn" onclick="answer(this, 'q1', true, 'أحسنت! تغيير شامل وكامل.')">b. changing completely</button>
+        <button class="opt-btn" onclick="answer(this, 'q1', false, 'خطأ!')">c. making worse</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="quiz-item" id="q2">
+      <div class="question-title">2. A <b>"hub"</b> refers to a ________.</div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="answer(this, 'q2', true, 'إجابة صحيحة! مركز ومحور.')">a. center</button>
+        <button class="opt-btn" onclick="answer(this, 'q2', false, 'خطأ!')">b. start</button>
+        <button class="opt-btn" onclick="answer(this, 'q2', false, 'خطأ!')">c. end</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="quiz-item" id="q3">
+      <div class="question-title">3. The word <b>"vibrant"</b> means ________.</div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="answer(this, 'q3', true, 'صحيح! مفعم بالنشاط والحيوية.')">a. strong and active</button>
+        <button class="opt-btn" onclick="answer(this, 'q3', false, 'خطأ!')">b. awake</button>
+        <button class="opt-btn" onclick="answer(this, 'q3', false, 'خطأ!')">c. quiet</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="quiz-item" id="q4">
+      <div class="question-title">4. A <b>"thriving"</b> market is one that is ________.</div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="answer(this, 'q4', false, 'خطأ!')">a. happy</button>
+        <button class="opt-btn" onclick="answer(this, 'q4', true, 'ممتاز! مزدهر وقوي.')">b. prosperous and strong</button>
+        <button class="opt-btn" onclick="answer(this, 'q4', false, 'خطأ!')">c. poor</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="quiz-item" id="q5">
+      <div class="question-title">5. Someone who is <b>"ambitious"</b> is ________.</div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="answer(this, 'q5', true, 'رائع! طموح وعازم على النجاح.')">a. determined to succeed</button>
+        <button class="opt-btn" onclick="answer(this, 'q5', false, 'خطأ!')">b. greedy</button>
+        <button class="opt-btn" onclick="answer(this, 'q5', false, 'خطأ!')">c. glorious</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="quiz-item" id="q6">
+      <div class="question-title">6. <b>"Enterprises"</b> are another term for ________.</div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="answer(this, 'q6', false, 'خطأ!')">a. ideas</button>
+        <button class="opt-btn" onclick="answer(this, 'q6', false, 'خطأ!')">b. schools</button>
+        <button class="opt-btn" onclick="answer(this, 'q6', true, 'صحيح! الشركات والمشاريع.')">c. businesses</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="quiz-item" id="q7">
+      <div class="question-title">7. To <b>"diversify"</b> means to ________.</div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="answer(this, 'q7', true, 'بطل! التنويع وجعله متعدداً.')">a. make more varied</button>
+        <button class="opt-btn" onclick="answer(this, 'q7', false, 'خطأ!')">b. widen</button>
+        <button class="opt-btn" onclick="answer(this, 'q7', false, 'خطأ!')">c. improve</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="quiz-item" id="q8">
+      <div class="question-title">8. When an organization is <b>"transparent"</b>, it is ________.</div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="answer(this, 'q8', false, 'خطأ!')">a. unclear</button>
+        <button class="opt-btn" onclick="answer(this, 'q8', false, 'خطأ!')">b. unlocked</button>
+        <button class="opt-btn" onclick="answer(this, 'q8', true, 'إجابة نموذجية! شفافية وصدق.')">c. open and honest</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="submit-container">
+      <button class="main-btn" onclick="showCertificate()">إصدار وتوثيق شهادة الإنجاز 🎓</button>
+    </div>
+  </div>
+
+  <!-- بطاقة شهادة التقدير الرسمية -->
+  <div id="certificateCard">
+    <div class="cert-title">شهادة تفوق وإنجاز أكاديمي</div>
+    <div class="cert-subtitle">Certificate of Academic Achievement</div>
+    
+    <p style="color: var(--text-muted); margin-bottom: 10px;">تُمنح هذه الشهادة تقديراً للتميز والجهد للطالب:</p>
+    <div class="cert-name">سيف منصور القرني</div>
+    
+    <div class="cert-body">
+      نظير إتقانه المتميز لمفردات ومفاهيم وحدة <b>(Expansion & Vocabulary Acquisition)</b> واجتيازه التقييم الشامل في مادة اللغة الإنجليزية بنجاح تام، مع أطيب التمنيات له بدوام التفوق المستمر.
+    </div>
+
+    <div class="cert-signatures">
+      <div class="sig-box">
+        <div class="sig-label">الطالب المتميز</div>
+        <div class="sig-name">سيف منصور القرني</div>
+        <div style="font-size: 0.85rem; color: #64748b;">الصف الأول الثانوي</div>
+      </div>
+      <div class="sig-box">
+        <div class="sig-label">معلم ومشرف المادة</div>
+        <div class="sig-name">أ. محمد عثمان</div>
+        <div style="font-size: 0.85rem; color: #64748b;">مشرف اللغة الإنجليزية</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 30px;">
+      <button class="main-btn print-btn" onclick="window.print()">طباعة الشهادة (PDF / Print)</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  let correctCount = 0;
+  const answeredQuestions = new Set();
+
+  function answer(btn, qId, isCorrect, feedbackMsg) {
+    if (answeredQuestions.has(qId)) return;
+    answeredQuestions.add(qId);
+
+    const parent = document.getElementById(qId);
+    const feedback = parent.querySelector('.feedback');
+    const buttons = parent.querySelectorAll('.opt-btn');
+
+    buttons.forEach(b => b.disabled = true);
+    feedback.style.display = 'block';
+
+    if (isCorrect) {
+      btn.classList.add('correct');
+      feedback.style.color = 'var(--success)';
+      feedback.innerHTML = '✔️ ' + feedbackMsg;
+      correctCount++;
+    } else {
+      btn.classList.add('wrong');
+      feedback.style.color = 'var(--error)';
+      feedback.innerHTML = '❌ ' + feedbackMsg;
+    }
+  }
+
+  function showCertificate() {
+    if (answeredQuestions.size < 8) {
+      alert('فضلاً أجب على جميع الأسئلة الثمانية أولاً لتفعيل الشهادة يا سيف!');
+      return;
+    }
+    const cert = document.getElementById('certificateCard');
+    cert.style.display = 'block';
+    cert.scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
